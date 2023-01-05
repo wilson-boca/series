@@ -9,11 +9,11 @@ class SerieDetailScene extends React.Component {
         const serie = this.props.navigation.state.params.serie
         return (
             <ScrollView>
-                <Image style={styles.image}
-                    source={{
-                        uri: serie.img
-                    }}
-                />
+                {
+                    serie.img 
+                    ? <Image style={styles.image} source={{ uri: serie.img}}/>
+                    : null
+                }
                 <Line label="Título" content={serie.title} />
 			    <Line label="Gênero" content={serie.gender} />
 				<Line label="Nota" content={serie.rate} />

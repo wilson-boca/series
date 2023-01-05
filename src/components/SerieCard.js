@@ -6,13 +6,15 @@ const SerieCard = ({ serie, isFirstColumn, onNavigate }) => (
         style={[styles.container, isFirstColumn ? styles.firstColumn : styles.lastColumn]}
         onPress={onNavigate}
     >
-        <View style={styles.card} >
-            <Image
-                source={{ uri: serie.img}}
-                aspectRatio={1}
-                resizeMode="cover"
-                borderRadius={15}
-            />
+        <View style={styles.card}>
+            {
+                serie.img ? <Image
+                    source={{ uri: serie.img}}
+                    aspectRatio={1}
+                    resizeMode="cover"
+                    borderRadius={15}
+                /> : null
+            }
             <View style={styles.cardTitleWrapper}>
                 <Text style={styles.cardTitle}>
                     {serie.title}
