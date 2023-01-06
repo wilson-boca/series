@@ -1,6 +1,6 @@
-import app from "./firebase";
-import { getAuth } from "firebase/auth";
-import { getDatabase, ref, get, set, child, push, update } from "firebase/database";
+import app from './firebase';
+import { getAuth } from 'firebase/auth';
+import { getDatabase, ref, update, push, set } from 'firebase/database';
 
 const db = getDatabase(app);
 const auth = getAuth();
@@ -11,8 +11,8 @@ export const setField = (field, value) => {
         type: SET_FIELD,
         field,
         value,
-    }
-}
+    };
+};
 
 export const SET_WHOLE_SERIE = 'SET_WHOLE_SERIE';
 export const setWholeSerie = serie => ({
@@ -30,28 +30,28 @@ const clearSerieForm = () => ({
     type: CLEAR_SERIE_FORM
 });
 
-export const SAVE_SERIE = 'SAVE_SERIE'
-export const saveSerie = serie => {
+export const SAVE_SERIE = 'SAVE_SERIE';
+export const saveSerie = (serie) => {
 
     const { currentUser }  = auth;
     if (serie.id) {
         const updates = {};
         updates[`users/${currentUser.uid}/series/${serie.id}`] = serie;
         delete serie.id;
-        return async dispatch => {
+        return async (dispatch) => {
             return await update(ref(db), updates).then(() => {
                 dispatch(clearSerieForm());
-             })
-        }
-    } else {
+             });
+        };
+    }
         const postListRef = ref(db,  `users/${currentUser.uid}/series`);
         const newPostRef = push(postListRef);
-        return async dispatch => {
+        return async (dispatch) => {
             return await set(newPostRef, serie).then(() => {
                 dispatch(clearSerieForm());
-            })
-        }    
-    }
-}
+            });
+        };
+
+};
 
 

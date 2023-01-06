@@ -1,20 +1,20 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
 
-const FormRow = props => {
+const FormRow = (props) => {
     const { children } = props;
-    return (        
+    return (
         <View style={styles.container}>
             {children}
         </View>
-    )
+    );
 };
 
 const styles = StyleSheet.create({
     container: {
-        alignSelf: "stretch",
+        alignSelf: 'stretch',
         padding: 5,
-        backgroundColor: "white",
+        backgroundColor: 'white',
         marginBottom: 5,
         marginTop: 5
     }

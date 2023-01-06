@@ -1,24 +1,19 @@
-import React from "react";
-import {View, TextInput, StyleSheet, Text, Button, ScrollView, KeyboardAvoidingView} from "react-native";
-import {Picker} from '@react-native-picker/picker';
+import React from 'react';
+import { View, TextInput, StyleSheet, Text, Button, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import Slider from '@react-native-community/slider';
-import FormRow from "../components/FormRow";
-import { connect } from "react-redux";
-import { setField, saveSerie, setWholeSerie, resetForm } from "../actions";
+import FormRow from '../components/FormRow';
+import { connect } from 'react-redux';
+import { setField, saveSerie, setWholeSerie, resetForm } from '../actions';
 
 class SeriesFormScene extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
-        const { navigation} = this.props;
+        const { navigation } = this.props;
         const { params } = navigation.state;
-        if (params && params.serieToEdit){
-            console.log(params.serieToEdit);
+        if (params && params.serieToEdit) {
             this.props.setWholeSerie(params.serieToEdit);
-        } else{
+        } else {
             this.props.resetForm();
         }
     }
@@ -28,38 +23,37 @@ class SeriesFormScene extends React.Component {
 
         return (
             <KeyboardAvoidingView
-            behavior="padding"
+            behavior='padding'
             enabled
             keyboardVerticalOffset={150}>
             <ScrollView>
                 <FormRow>
                     <TextInput
-                        style={styles.input} 
-                        placeholder="Título"
+                        style={styles.input}
+                        placeholder='Título'
                         value={serieForm.title}
-                        onChangeText={value => setField("title", value)}
+                        onChangeText={value => setField('title', value)}
                     />
                 </FormRow>
                 <FormRow>
                     <TextInput
-                        style={styles.input} 
-                        placeholder="URL da imagem"
+                        style={styles.input}
+                        placeholder='URL da imagem'
                         value={serieForm.img}
-                        onChangeText={value => setField("img", value)}
+                        onChangeText={value => setField('img', value)}
                     />
                 </FormRow>
                 <Picker
                     selectedValue={serieForm.gender}
                     style={styles.picker}
-                    onValueChange={(itemValue, itemIndex) =>
-                        setField('gender', itemValue)
+                    onValueChange={itemValue => setField('gender', itemValue)
                     }>
-                    <Picker.Item label="Policial" value="Policial" />
-                    <Picker.Item label="Comédia" value="Comédia" />
-                    <Picker.Item label="Drama" value="Drama" />
-                    <Picker.Item label="Ficção Científica" value="Ficção Científica" />
-                    <Picker.Item label="Romance" value="Romance" />    
-                    <Picker.Item label="Ação" value="Ação" />    
+                    <Picker.Item label='Policial' value='Policial' />
+                    <Picker.Item label='Comédia' value='Comédia' />
+                    <Picker.Item label='Drama' value='Drama' />
+                    <Picker.Item label='Ficção Científica' value='Ficção Científica' />
+                    <Picker.Item label='Romance' value='Romance' />
+                    <Picker.Item label='Ação' value='Ação' />
                 </Picker>
                 <FormRow>
                     <View style={styles.grade}>
@@ -67,8 +61,7 @@ class SeriesFormScene extends React.Component {
                         <Text>{serieForm.rate}</Text>
                     </View>
                     <Slider
-                        onValueChange={(value) =>
-                            setField('rate', value)
+                        onValueChange={value => setField('rate', value)
                         }
                         style={styles.slide}
                         step={1}
@@ -82,18 +75,18 @@ class SeriesFormScene extends React.Component {
                         multiline={true}
                         textAlignVertical={'top'}
                         textAlign={'left'}
-                        style={styles.description} 
-                        placeholder="Descrição"
+                        style={styles.description}
+                        placeholder='Descrição'
                         value={serieForm.description}
-                        onChangeText={value => setField("description", value)}
+                        onChangeText={value => setField('description', value)}
                     />
                 </FormRow>
                 <View style={styles.save}>
-                    <Button 
-                        title="Salvar"
+                    <Button
+                        title='Salvar'
                         onPress={async () => {
                             try {
-                                await saveSerie(serieForm)
+                                await saveSerie(serieForm);
                             } catch (error) {
                                 console.log(error);
                             } finally {
@@ -103,7 +96,7 @@ class SeriesFormScene extends React.Component {
                     />
                 </View>
             </ScrollView>
-        </KeyboardAvoidingView>    
+        </KeyboardAvoidingView>
         );
     }
 }
@@ -111,18 +104,18 @@ class SeriesFormScene extends React.Component {
 const styles = StyleSheet.create({
     input: {
         padding: 5,
-        backgroundColor: "#e5e5e5"
+        backgroundColor: '#e5e5e5'
     },
     picker: {
         width: '100%'
     },
     slide: {
-        width: '100%', 
+        width: '100%',
         height: 30
     },
     grade: {
-        flexDirection: "row",
-        justifyContent: "space-between",
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         paddingLeft: 5,
         paddingRight: 15
     },
@@ -134,7 +127,7 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
     return {
         serieForm: state.serieForm
-    }
+    };
 }
 
 const mapDispatchToProps = {
@@ -142,6 +135,6 @@ const mapDispatchToProps = {
     saveSerie,
     setWholeSerie,
     resetForm
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SeriesFormScene);

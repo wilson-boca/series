@@ -1,14 +1,13 @@
-import React from "react";
-import {View, FlatList, ActivityIndicator} from "react-native";
-import { connect } from "react-redux";
-// import series from "../series.json"
-import SerieCard from "../components/SerieCard";
-import AddSerieCard from "../components/AddSerieCard";
-import { watchedSeries } from "../actions";
+import React from 'react';
+import { View, FlatList, ActivityIndicator } from 'react-native';
+import { connect } from 'react-redux';
+import SerieCard from '../components/SerieCard';
+import AddSerieCard from '../components/AddSerieCard';
+import { watchedSeries } from '../actions';
 
 const isEven = (number) => {
     return number % 2 === 0;
-}
+};
 
 class SeriesScene extends React.Component {
 
@@ -18,37 +17,37 @@ class SeriesScene extends React.Component {
 
     render() {
         if (this.props.series === null) {
-            return <ActivityIndicator />
+            return <ActivityIndicator />;
         }
 
         return (
             <View>
             <FlatList
                 numColumns={2}
-                data={[...this.props.series, { isLast: true}]}
-                renderItem={({ item, index}) => (
-                    item.isLast ? 
-                    <AddSerieCard 
+                data={[...this.props.series, { isLast: true }]}
+                renderItem={({ item, index }) => (
+                    item.isLast
+                    ? <AddSerieCard
                         isFirstColumn={isEven(index)}
-                        onNavigate={() => this.props.navigation.navigate("form")}                
-                    /> : 
-                    <SerieCard
+                        onNavigate={() => this.props.navigation.navigate('form')}
+                    />
+                    : <SerieCard
                         serie={item}
                         isFirstColumn={isEven(index)}
-                        onNavigate={() => this.props.navigation.navigate("details", { serie: item })}
+                        onNavigate={() => this.props.navigation.navigate('details', { serie: item })}
                     />
-                    
+
                 )}
                 keyExtractor={ item => item.id}
-                ListHeaderComponent={() => (<View style={{ marginTop: 5}} />)}
-                ListFooterComponent={() => (<View style={{ marginBottom: 5}} />)}
+                ListHeaderComponent={() => (<View style={{ marginTop: 5 }} />)}
+                ListFooterComponent={() => (<View style={{ marginBottom: 5 }} />)}
             />
-            </View>        
+            </View>
         );
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     const { series } = state;
 
     if (!series) {
@@ -56,12 +55,10 @@ const mapStateToProps = state => {
     }
 
     const keys = Object.keys(series);
-    console.log("keys:", keys);
-    const seriesWithKeys = keys.map(key => {
+    const seriesWithKeys = keys.map((key) => {
         return { ...series[key], id: key };
-    })
-    console.log("seriesWithKeys:", seriesWithKeys);
+    });
     return { series: seriesWithKeys };
-}
+};
 
 export default connect(mapStateToProps, { watchedSeries })(SeriesScene);

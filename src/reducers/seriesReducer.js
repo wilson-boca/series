@@ -1,4 +1,4 @@
-import { SET_SERIES } from "../actions";
+import { SET_SERIES } from '../actions';
 
 export default function userReducer(state = null, action) {
     switch (action.type) {
@@ -7,4 +7,4 @@ export default function userReducer(state = null, action) {
         default:
             return state;
     }
-};
+}

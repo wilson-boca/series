@@ -1,17 +1,17 @@
-import React from "react";
-import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity } from "react-native";
+import React from 'react';
+import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 
 const SerieCard = ({ serie, isFirstColumn, onNavigate }) => (
-    <TouchableOpacity 
+    <TouchableOpacity
         style={[styles.container, isFirstColumn ? styles.firstColumn : styles.lastColumn]}
         onPress={onNavigate}
     >
         <View style={styles.card}>
             {
                 serie.img ? <Image
-                    source={{ uri: serie.img}}
+                    source={{ uri: serie.img }}
                     aspectRatio={1}
-                    resizeMode="cover"
+                    resizeMode='cover'
                     borderRadius={15}
                 /> : null
             }
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         paddingBottom: 5,
         paddingRight: 2,
         paddingLeft: 2,
-        alignItems: "center",
+        alignItems: 'center',
         borderRadius: 15,
         borderTopLeftRadius: 0,
         borderTopRightRadius: 0
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     cardTitle: {
         color: 'white',
         fontSize: 14,
-        fontWeight: "bold"
+        fontWeight: 'bold'
     },
     firstColumn: {
         paddingLeft: 10
@@ -63,6 +63,6 @@ const styles = StyleSheet.create({
     lastColumn: {
         paddingRight: 10
     }
-})
+});
 
 export default SerieCard;

@@ -1,4 +1,4 @@
-import { USER_LOGIN_SUCCESS } from "../actions";
+import { USER_LOGIN_SUCCESS } from '../actions';
 
 export default function userReducer(state = null, action) {
     switch (action.type) {
@@ -8,4 +8,4 @@ export default function userReducer(state = null, action) {
             return state;
     }
 
-};
+}

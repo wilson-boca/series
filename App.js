@@ -1,3 +1,3 @@
-import SeriesApp from "./src/SeriesApp";
+import SeriesApp from './src/SeriesApp';
 
 export default SeriesApp;
