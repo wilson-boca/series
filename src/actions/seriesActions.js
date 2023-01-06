@@ -20,7 +20,6 @@ export const watchedSeries = () => {
     return (dispatch) => {
         const starCountRef = ref(db, `users/${currentUser.uid}/series`);
         return onValue(starCountRef, (snapshot) => {
-            const data = snapshot.val();
             dispatch(setSeries(snapshot.val()));
         });
     };
