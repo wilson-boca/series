@@ -9,8 +9,8 @@ class LoginScene extends React.Component {
         super(props);
 
         this.state = {
-            email: "ok@provider.com",
-            password: "qwert321",
+            email: "",
+            password: "",
             isLoading: false,
             errorCode: ""
         }
